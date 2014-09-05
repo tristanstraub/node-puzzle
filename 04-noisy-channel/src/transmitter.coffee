@@ -6,6 +6,8 @@ module.exports = class Transmitter
     assert @noise
 
   transmit: (bits) ->
+    assert bits
+
     encoded = @enforceBooleanArray @encoder.encode(bits)
     noisy = @enforceBooleanArray @noise.applyNoise encoded
     decoded = @enforceBooleanArray @encoder.decode noisy
@@ -13,4 +15,6 @@ module.exports = class Transmitter
     return decoded
 
   enforceBooleanArray: (bits) ->
+    assert bits
+
     bits.map Boolean

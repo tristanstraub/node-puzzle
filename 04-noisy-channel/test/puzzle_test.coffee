@@ -5,6 +5,8 @@ Encoder = require '../src/encoder'
 
 describe 'Noise transmitter', ->
   describe 'encode/decode', ->
+    n = 5
+
     test = (noiseProbability) ->
       randomBoolean = -> Math.random() >= 1 - noiseProbability
 
@@ -13,19 +15,18 @@ describe 'Noise transmitter', ->
 
       transmitter = new Transmitter {encoder, noise}
 
-      n = 10
-      bits = [0...10].map -> Math.random() >= 0.5
+      bits = [0...n].map -> Math.random() >= 0.5
 
       expect(transmitter.transmit bits).to.eql bits
 
-    it 'should be able to transmit signal without loss on perfect channel', ->
-      for i in [0..10]
+    it 'TRIVIAL: should be able to transmit signal without loss on perfect channel', ->
+      for i in [0..100]
         test 0
 
-    it 'should be able to transmit signal without loss on slightly noise channel', ->
-      for i in [0..10]
+    it 'YOU WON: should be able to transmit signal without loss on slightly noise channel', ->
+      for i in [0..100]
         test 0.2
 
-    it 'should be able to transmit signal without loss on very noise channel', ->
-      for i in [0..10]
+    it 'BONUS: should be able to transmit signal without loss on very noise channel', ->
+      for i in [0..100]
         test 0.7
